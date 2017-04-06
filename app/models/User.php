@@ -9,18 +9,20 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
-	/**
-	 * The database table used by the model.
-	 *
-	 * @var string
-	 */
-	protected $table = 'users';
+	protected $hidden = array('password');
 
-	/**
-	 * The attributes excluded from the model's JSON form.
-	 *
-	 * @var array
-	 */
-	protected $hidden = array('password', 'remember_token');
+	public function bankAccounts()
+    {
+        return $this->hasMany('BankAccount');
+    }
 
+	public function profile()
+    {
+        return $this->hasOne('Profile');
+    }
+
+    public function wallet()
+    {
+        return $this->hasOne('Wallet');
+    }
 }
