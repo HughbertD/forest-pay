@@ -9,7 +9,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 
 	use UserTrait, RemindableTrait;
 
-	protected $hidden = array('password');
+	protected $hidden = ['password'];
+
+	public $fillable = ['username', 'password'];
 
 	public function bankAccounts()
     {
