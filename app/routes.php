@@ -16,3 +16,6 @@ Route::get('register', function() {
 
 // Registration POST
 Route::post('users/store', 'UsersController@store');
+
+// Landing page after login
+Route::get('/me', 'UsersController@me');

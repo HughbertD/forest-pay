@@ -17,6 +17,15 @@ class UsersController extends BaseController
     }
 
     /**
+     * @return mixed
+     */
+    public function me()
+    {
+        $user = User::find(Auth::user()->id);
+        return View::make('users.me', ['user' => $user]);
+    }
+
+    /**
      * Create a new user, log them in, send them to /me
      */
     public function store()
