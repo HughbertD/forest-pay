@@ -23,7 +23,7 @@ class CreateTransactionsTable extends Migration {
             $table->integer('bank_account_id')->unsigned()->nullable();
             $table->integer('wallet_id')->unsigned()->nullable();
 
-            $table->decimal('amount', 19, 4);
+            $table->decimal('amount', 19, 4)->nullable();
             $table->string('event', 255);
             $table->longText('data');
         });
