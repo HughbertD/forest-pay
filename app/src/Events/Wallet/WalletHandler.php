@@ -2,24 +2,19 @@
 
 namespace ForestPay\Events\Wallet;
 
-use ForestPay\Services\Validation\Transaction;
+use ForestPay\Events\LogsToTransactionsTrait;
 
 class WalletHandler
 {
+    use LogsToTransactionsTrait;
+
     public function onCreate(\Wallet $wallet)
     {
-        $transactionValidator = new Transaction([
+        $this->logToTransaction([
             'user_id' => $wallet->user_id,
             'wallet_id' => $wallet->id,
             'event' => 'Wallet Created',
             'data' => json_encode($wallet)
         ]);
-
-        if ($transactionValidator->fails()) {
-            throw new \Exception("Failed to validate transaction log");
-        }
-
-        $transaction = new \Transaction($transactionValidator->data());
-        $transaction->save();
     }
 }
