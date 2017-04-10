@@ -22,7 +22,7 @@ class UsersController extends BaseController
     public function me()
     {
         $user = User::find(Auth::user()->id);
-        return View::make('users.me', ['user' => $user]);
+        return View::make('users.me', ['user' => $user, 'wallet' => $user->wallet()->first(), 'banks' => $user->bankAccounts()->get()]);
     }
 
     /**

@@ -26,3 +26,11 @@ Route::get('/banks/template/{template}', 'BanksController@template');
 Route::group(['prefix' => 'api/v1'], function () {
     Route::resource('banks', 'Api\v1\BanksController', ['only' => ['store']]);
 });
+
+Route::get('/banks/template/{template}', 'BanksController@template');
+Route::get('/banks', 'BanksController@index');
+
+// API routes
+Route::group(['prefix' => 'api/v1'], function () {
+    Route::resource('bank', 'BanksController', ['only' => ['create']]);
+});

@@ -2,10 +2,22 @@
 @section('content')
     <div class="row">
         <div class="col col-lg-12">
-            <div class="well-lg">
-                <p>Hello {{ $user->profile->first_name }}</p>
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Hello {{ $user->profile->first_name }}</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">Current balance 100.00</h6>
+                </div>
             </div>
-            <p>Lets do it</p>
         </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col col-lg-6">
+            <div id="bankPod">
+                @include('banks.index', ['banks' => $banks])
+            </div>
+        </div>
+
     </div>
 @stop
