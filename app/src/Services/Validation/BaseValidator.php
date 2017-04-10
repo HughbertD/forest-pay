@@ -24,6 +24,11 @@ abstract class BaseValidator implements ValidationInterface
      */
     protected $fails;
 
+    /**
+     * @var array - data for validation
+     */
+    protected $data;
+
     public function __construct(array $input)
     {
         $this->validator = \Validator::make($input, $this->rules);
@@ -31,6 +36,7 @@ abstract class BaseValidator implements ValidationInterface
         if ($this->fails) {
             $this->messages = $this->validator->messages();
         }
+        $this->data = $input;
     }
 
     /**
@@ -47,5 +53,13 @@ abstract class BaseValidator implements ValidationInterface
     public function fails()
     {
         return $this->fails;
+    }
+
+    /**
+     * @return array
+     */
+    public function data()
+    {
+        return $this->data;
     }
 }
