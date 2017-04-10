@@ -39,4 +39,22 @@ class BanksControllerTest extends \IntegrationTestCase
         $this->assertArrayHasKey('id', $jsonResponse);
         $this->assertTrue(is_numeric($jsonResponse['id']));
     }
+
+    /**
+     * @group DB
+     */
+    public function testStoreBankGivesValidationError()
+    {
+        $this->be($this->user);
+        $response = $this->call('POST', 'api/v1/banks', [
+            'bank_name' => 'Barclays Bank',
+            'beneficiary_name' => 'Karl Francis'
+        ]);
+        $jsonResponse = json_decode($response->getContent(), true);
+
+        $this->assertResponseStatus(400);
+        $this->assertInternalType('array', $jsonResponse);
+        $this->assertArrayHasKey('name', $jsonResponse);
+        $this->assertArrayHasKey('iban', $jsonResponse);
+    }
 }
