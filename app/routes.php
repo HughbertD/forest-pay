@@ -19,3 +19,10 @@ Route::post('users/store', 'UsersController@store');
 
 // Landing page after login
 Route::get('/me', 'UsersController@me');
+
+Route::get('/banks/template/{template}', 'BanksController@template');
+
+// API routes
+Route::group(['prefix' => 'api/v1'], function () {
+    Route::resource('banks', 'Api\v1\BanksController', ['only' => ['store']]);
+});
