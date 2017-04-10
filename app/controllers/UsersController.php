@@ -50,6 +50,7 @@ class UsersController extends BaseController
         }
 
         Auth::login($user);
+        Event::fire('User.wasRegistered', [$user]);
         return Redirect::to('/me');
     }
 }

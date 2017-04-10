@@ -16,4 +16,13 @@ class UserHandler
             'data' => json_encode($user)
         ]);
     }
+
+    public function wasRegistered(\User $user)
+    {
+        $this->logToTransaction([
+            'user_id' => $user->id,
+            'event' => 'User Registered',
+            'data' => json_encode($user)
+        ]);
+    }
 }
