@@ -33,11 +33,17 @@ class BanksControllerTest extends \IntegrationTestCase
         ]);
 
         $jsonResponse = json_decode($response->getContent(), true);
+        $bankAccount = \BankAccount::orderBy('id', 'desc')->first();
+        $transactions = $bankAccount->transactions()->get();
 
         $this->assertResponseOk();
         $this->assertInternalType('array', $jsonResponse);
         $this->assertArrayHasKey('id', $jsonResponse);
         $this->assertTrue(is_numeric($jsonResponse['id']));
+
+        $this->assertInstanceOf(\BankAccount::class, $bankAccount);
+        $this->assertCount(1, $transactions);
+        $this->assertEquals('Bank Account Created', $transactions[0]->event);
     }
 
     /**
