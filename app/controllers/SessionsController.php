@@ -30,7 +30,7 @@ class SessionsController extends BaseController
 	public function store()
     {
         if (Auth::attempt(Input::only('username', 'password'))) {
-            dd("Success");
+            return Redirect::to('/me');
         }
 
         return Redirect::back()->withInput();
