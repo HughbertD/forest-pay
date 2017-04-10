@@ -21,7 +21,7 @@ class UsersControllerTest extends IntegrationTestCase
         $user = \User::orderBy('id', 'desc')->first();
         $profile = $user->profile()->first();
         $wallet = $user->wallet()->first();
-        $transactions = $user->transactions()->get();
+        $notes = $user->notes()->get();
 
         $this->assertRedirectedTo('/me');
         $this->assertEquals('hugh@example.com', $user->username);
@@ -29,9 +29,9 @@ class UsersControllerTest extends IntegrationTestCase
         $this->assertEquals('downer', $profile->last_name);
         $this->assertEquals('My Wallet', $wallet->name);
 
-        $this->assertCount(3, $transactions);
-        $this->assertEquals('User Created', $transactions[0]->event);
-        $this->assertEquals('Wallet Created', $transactions[1]->event);
-        $this->assertEquals('User Registered', $transactions[2]->event);
+        $this->assertCount(3, $notes);
+        $this->assertEquals('User Created', $notes[0]->event);
+        $this->assertEquals('Wallet Created', $notes[1]->event);
+        $this->assertEquals('User Registered', $notes[2]->event);
     }
 }

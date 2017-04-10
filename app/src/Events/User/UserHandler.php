@@ -2,15 +2,15 @@
 
 namespace ForestPay\Events\User;
 
-use ForestPay\Events\LogsToTransactionsTrait;
+use ForestPay\Events\EnterNoteTrait;
 
 class UserHandler
 {
-    use LogsToTransactionsTrait;
+    use EnterNoteTrait;
 
     public function onCreate(\User $user)
     {
-        $this->logToTransaction([
+        $this->createNote([
             'user_id' => $user->id,
             'event' => 'User Created',
             'data' => json_encode($user)
@@ -19,7 +19,7 @@ class UserHandler
 
     public function wasRegistered(\User $user)
     {
-        $this->logToTransaction([
+        $this->createNote([
             'user_id' => $user->id,
             'event' => 'User Registered',
             'data' => json_encode($user)

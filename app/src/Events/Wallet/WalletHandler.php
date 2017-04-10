@@ -2,17 +2,16 @@
 
 namespace ForestPay\Events\Wallet;
 
-use ForestPay\Events\LogsToTransactionsTrait;
+use ForestPay\Events\EnterNoteTrait;
 
 class WalletHandler
 {
-    use LogsToTransactionsTrait;
+    use EnterNoteTrait;
 
     public function onCreate(\Wallet $wallet)
     {
-        $this->logToTransaction([
+        $this->createNote([
             'user_id' => $wallet->user_id,
-            'wallet_id' => $wallet->id,
             'event' => 'Wallet Created',
             'data' => json_encode($wallet)
         ]);

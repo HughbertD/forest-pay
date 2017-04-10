@@ -2,17 +2,16 @@
 
 namespace ForestPay\Events\BankAccount;
 
-use ForestPay\Events\LogsToTransactionsTrait;
+use ForestPay\Events\EnterNoteTrait;
 
 class BankAccountHandler
 {
-    use LogsToTransactionsTrait;
+    use EnterNoteTrait;
 
     public function onCreate(\BankAccount $bankAccount)
     {
-        $this->logToTransaction([
+        $this->createNote([
             'user_id' => $bankAccount->user_id,
-            'bank_account_id' => $bankAccount->id,
             'event' => 'Bank Account Created',
             'data' => json_encode($bankAccount)
         ]);

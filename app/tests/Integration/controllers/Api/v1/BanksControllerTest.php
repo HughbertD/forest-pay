@@ -34,7 +34,7 @@ class BanksControllerTest extends \IntegrationTestCase
 
         $jsonResponse = json_decode($response->getContent(), true);
         $bankAccount = \BankAccount::orderBy('id', 'desc')->first();
-        $transactions = $bankAccount->transactions()->get();
+        $notes = $this->user->notes()->where('event', 'Bank Account Created')->get();
 
         $this->assertResponseOk();
         $this->assertInternalType('array', $jsonResponse);
@@ -42,8 +42,8 @@ class BanksControllerTest extends \IntegrationTestCase
         $this->assertTrue(is_numeric($jsonResponse['id']));
 
         $this->assertInstanceOf(\BankAccount::class, $bankAccount);
-        $this->assertCount(1, $transactions);
-        $this->assertEquals('Bank Account Created', $transactions[0]->event);
+        $this->assertCount(1, $notes);
+        $this->assertEquals('Bank Account Created', $notes[0]->event);
     }
 
     /**
