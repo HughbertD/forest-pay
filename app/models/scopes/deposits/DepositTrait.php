@@ -4,6 +4,6 @@ trait DepositTrait
 {
     public static function bootDepositTrait()
     {
-        static::addGlobalScope(new DepositScope);
+        static::addGlobalScope(new TransactionScope(Deposit::$event));
     }
 }

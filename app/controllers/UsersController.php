@@ -23,7 +23,9 @@ class UsersController extends BaseController
     {
         $user = User::find(Auth::user()->id);
         $deposits = $user->deposits()->orderBy('created_at', 'desc')->limit(10)->get();
-        return View::make('users.me', ['user' => $user, 'wallet' => $user->wallet()->first(), 'banks' => $user->bankAccounts()->get(), 'deposits' => $deposits]);
+        $transactions = \Transaction::where('user_id', $user->id)->get();
+
+        return View::make('users.me', ['user' => $user, 'wallet' => $user->wallet()->first(), 'banks' => $user->bankAccounts()->get(), 'deposits' => $deposits, 'transactions' => $transactions]);
     }
 
     /**

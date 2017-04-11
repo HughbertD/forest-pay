@@ -3,12 +3,25 @@
 use \Illuminate\Database\Eloquent\Builder;
 
 /**
- * Global scope to DEPOSIT transactions only
- * Class DepositScope
+ * Global scope to Deposit / Withdrawal transactions only
+ * Class TransactionScope
  */
-class DepositScope implements \Illuminate\Database\Eloquent\ScopeInterface
+class TransactionScope implements \Illuminate\Database\Eloquent\ScopeInterface
 {
+    /**
+     * @var string - column on transaction table that is scoped
+     */
     private $scopeToColumn = 'event';
+
+    /**
+     * @var string - scope itself to narrow the search to on the column
+     */
+    private $columnScope;
+
+    public function __construct($eventScope)
+    {
+        $this->columnScope = $eventScope;
+    }
 
     /**
      * Apply global scope to query
@@ -16,7 +29,7 @@ class DepositScope implements \Illuminate\Database\Eloquent\ScopeInterface
      */
     public function apply(Builder $builder)
     {
-        $builder->where('event', \Deposit::$event);
+        $builder->where('event', $this->columnScope);
     }
 
     /**
@@ -27,7 +40,7 @@ class DepositScope implements \Illuminate\Database\Eloquent\ScopeInterface
     {
         $query = $builder->getQuery();
         foreach ((array) $query->wheres as $key => $where) {
-            if (!$this->isDepositScoped($where['column'], $where['value'])) {
+            if (!$this->isScoped($where['column'], $where['value'])) {
                 continue;
             }
             unset($query->wheres[$key]);
@@ -41,9 +54,9 @@ class DepositScope implements \Illuminate\Database\Eloquent\ScopeInterface
      * @param $value
      * @return bool
      */
-    private function isDepositScoped($column, $value)
+    private function isScoped($column, $value)
     {
-        return ($column == $this->scopeToColumn && $value == \Deposit::$event);
+        return ($column == $this->scopeToColumn && $value == $this->columnScope);
     }
 
 }

@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-block">
                     <h4 class="card-title">Hello {{ $user->profile->first_name }}</h4>
-                    <h6 class="card-subtitle mb-2 text-muted">Current balance 100.00</h6>
+                    <h6 class="card-subtitle mb-2 text-muted">Current balance {{ $transactions->balance() }}</h6>
                 </div>
             </div>
         </div>
