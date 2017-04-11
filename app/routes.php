@@ -32,5 +32,6 @@ Route::get('/banks', 'BanksController@index');
 
 // API routes
 Route::group(['prefix' => 'api/v1'], function () {
-    Route::resource('bank', 'BanksController', ['only' => ['create']]);
+    Route::resource('banks', 'Api\v1\BanksController', ['only' => ['store']]);
+    Route::resource('deposits', 'Api\v1\DepositsController', ['only' => ['store']]);
 });

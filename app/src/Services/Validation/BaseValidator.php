@@ -15,6 +15,11 @@ abstract class BaseValidator implements ValidationInterface
     protected $rules = [];
 
     /**
+     * @var array - any customised messages to return
+     */
+    protected $customErrorMessages = [];
+
+    /**
      * @var array - message store to be returned
      */
     protected $messages = [];
@@ -31,7 +36,7 @@ abstract class BaseValidator implements ValidationInterface
 
     public function __construct(array $input)
     {
-        $this->validator = \Validator::make($input, $this->rules);
+        $this->validator = \Validator::make($input, $this->rules, $this->customErrorMessages);
         $this->fails = $this->validator->fails();
         if ($this->fails) {
             $this->messages = $this->validator->messages();

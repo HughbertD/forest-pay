@@ -37,4 +37,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     {
         return $this->hasOne('Wallet');
     }
+
+    public function scopeOfEmail($query, $email)
+    {
+        return $query->where('username', $email);
+    }
 }
