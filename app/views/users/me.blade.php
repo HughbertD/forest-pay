@@ -18,6 +18,13 @@
                 @include('banks.index', ['banks' => $banks])
             </div>
         </div>
+    </div>
 
+    <div class="row">
+        <div class="col col-lg-12">
+            <div id="depositPod">
+                @include('deposits.index', ['deposits' => $deposits])
+            </div>
+        </div>
     </div>
 @stop

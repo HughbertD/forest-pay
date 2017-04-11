@@ -1,8 +1,12 @@
 $(function () {
     // Load a dynamic modal based on link attributes
-    $('[data-modal]').on('click', function (e) {
+    $('body').on('click', '[data-modal]', function (e) {
         e.preventDefault();
         var $modal = $('#modal');
+        var $submit = $modal.find('[data-modal-button]');
+        $modal.on('hide.bs.modal', function (e) {
+            $submit.off('click');
+        });
         $modal.modal('show');
 
         var reloadContainer = $(this).data('modal-get-container');
@@ -14,9 +18,9 @@ $(function () {
             var $form = $modal.find('form');
             var url = $form.attr('action');
 
-            $modal.find('[data-modal-button]').on('click', function (e) {
+            $submit.on('click', function (e) {
                 e.preventDefault();
-                sendModalBasedAjaxRequest($form.serialize(), url, reloadContainer, reloadUrl, $modal, $form);
+                sendModalBasedAjaxRequest($form.serialize(), url, reloadContainer, reloadUrl, $modal, $form, $submit);
             });
         });
 
