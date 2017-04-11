@@ -32,5 +32,7 @@ Route::group(['before' => 'auth'], function () {
     Route::group(['prefix' => 'api/v1'], function () {
         Route::resource('banks', 'Api\v1\BanksController', ['only' => ['store']]);
         Route::resource('deposits', 'Api\v1\DepositsController', ['only' => ['store']]);
+
+        Route::get('/users/find/{username}', 'Api\v1\UsersController@find');
     });
 });

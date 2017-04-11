@@ -2,9 +2,7 @@
 
 class TransactionCollectionTest extends TestCase
 {
-    /**
-     * @group hugh
-     */
+
     public function testBalance()
     {
         $deposit = new \Transaction(['amount' => 100]);
