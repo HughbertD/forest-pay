@@ -23,8 +23,6 @@ Route::group(['before' => 'auth'], function () {
     Route::get('/me', 'UsersController@me');
 
     Route::get('/banks/template/{template}', 'BanksController@template');
-
-    Route::get('/banks/template/{template}', 'BanksController@template');
     Route::get('/banks', 'BanksController@index');
 
     Route::get('/deposits/template/{template}', 'DepositsController@template');
