@@ -17,24 +17,22 @@ Route::get('register', function() {
 // Registration POST
 Route::post('users/store', 'UsersController@store');
 
-// Landing page after login
-Route::get('/me', 'UsersController@me');
+// Authenticated routes
+Route::group(['before' => 'auth'], function () {
+    // Landing page after login
+    Route::get('/me', 'UsersController@me');
 
-Route::get('/banks/template/{template}', 'BanksController@template');
+    Route::get('/banks/template/{template}', 'BanksController@template');
 
-// API routes
-Route::group(['prefix' => 'api/v1'], function () {
-    Route::resource('banks', 'Api\v1\BanksController', ['only' => ['store']]);
-});
+    Route::get('/banks/template/{template}', 'BanksController@template');
+    Route::get('/banks', 'BanksController@index');
 
-Route::get('/banks/template/{template}', 'BanksController@template');
-Route::get('/banks', 'BanksController@index');
+    Route::get('/deposits/template/{template}', 'DepositsController@template');
+    Route::get('/deposits', 'DepositsController@index');
 
-Route::get('/deposits/template/{template}', 'DepositsController@template');
-Route::get('/deposits', 'DepositsController@index');
-
-// API routes
-Route::group(['prefix' => 'api/v1'], function () {
-    Route::resource('banks', 'Api\v1\BanksController', ['only' => ['store']]);
-    Route::resource('deposits', 'Api\v1\DepositsController', ['only' => ['store']]);
+    // API routes
+    Route::group(['prefix' => 'api/v1'], function () {
+        Route::resource('banks', 'Api\v1\BanksController', ['only' => ['store']]);
+        Route::resource('deposits', 'Api\v1\DepositsController', ['only' => ['store']]);
+    });
 });
