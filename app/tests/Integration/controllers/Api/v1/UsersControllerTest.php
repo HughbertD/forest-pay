@@ -5,7 +5,6 @@ namespace tests\Api\v1;
 use ForestPay\Services\Creation\ForestPayDeposit;
 use ForestPay\Services\Creation\ForestPayUser;
 use ForestPay\Services\Creation\MoneyTransfer\ForestPayTransfer;
-use ForestPay\Services\Creation\MoneyTransfer\InsufficientFundException;
 
 class UsersControllerTest extends \IntegrationTestCase
 {
