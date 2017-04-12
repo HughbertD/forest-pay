@@ -13,7 +13,7 @@ class WithdrawalsController extends \BaseController
         $data['user_id'] = \Auth::user()->id;
         $data['wallet_id'] = \Auth::user()->wallet()->get()->first()->id;
 
-        $withdrawalValidator = new Withdrawal($data);
+        $withdrawalValidator = new Withdrawal($data, \Auth::user()->transactions()->get()->balance());
         if ($withdrawalValidator->fails()) {
             return \Response::json($withdrawalValidator->messages(), 400);
         }

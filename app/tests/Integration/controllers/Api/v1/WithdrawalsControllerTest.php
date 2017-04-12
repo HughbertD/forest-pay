@@ -68,4 +68,34 @@ class WithdrawalsControllerTest extends \IntegrationTestCase
         $this->assertResponseOk();
         $this->assertInternalType('array', $response);
     }
+
+    /**
+     * @group DB
+     */
+    public function testWithdrawToBankNoFunds()
+    {
+        (new \BankAccount([
+            'name' => 'Bank Name',
+            'bank_name' => 'Barclays Bank',
+            'iban' => 'GB04BARC20474473160944',
+            'beneficiary_name' => 'Karl Francis',
+            'user_id' => $this->user->id
+        ]))->save();
+        (new \Deposit([
+            'amount' => 100,
+            'wallet_id' => $this->user->wallet()->first()->id,
+            'user_id' => $this->user->id,
+            'event' => \Deposit::$event,
+            'data' => ''
+        ]))->save();
+
+        $response = $this->call('POST', 'api/v1/withdrawals/to_bank', [
+            'bank_id' => 1,
+            'amount' => 200
+        ])->getContent();
+        $response = json_decode($response, true);
+        $this->assertResponseStatus(400);
+        $this->assertInternalType('array', $response);
+        $this->assertArrayHasKey('amount', $response);
+    }
 }
