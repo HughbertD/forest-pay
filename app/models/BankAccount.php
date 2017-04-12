@@ -13,4 +13,9 @@ class BankAccount extends Eloquent
     {
         return $this->belongsTo('User');
     }
+
+    public function getDisplayNameAttribute()
+    {
+        return $this->name . " (" . $this->bank_name . ")";
+    }
 }

@@ -25,6 +25,14 @@
         </div>
     </div>
 
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="col col-lg-6">
+            <div id="withdrawPod">
+                @include('withdrawals.pod', ['banks' => $banks])
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col col-lg-12">
             <div id="depositPod">

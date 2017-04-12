@@ -88,3 +88,14 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+/*
+|--------------------------------------------------------------------------
+| Owner Filters
+|--------------------------------------------------------------------------
+|
+| Ensures the user is the owner of the bank/wallet/etc they are trying to tamper with
+| Requires that a *_id be present, and the user is logged in, returns unauthorized 401 on failure
+| @see: ForestPay\Services\Filters\OwnerFilterInterface for implementation details
+*/
+Route::filter('bankOwner', 'ForestPay\Services\Filters\BankOwnerFilter');

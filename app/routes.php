@@ -28,6 +28,8 @@ Route::group(['before' => 'auth'], function () {
     Route::get('/deposits/template/{template}', 'DepositsController@template');
     Route::get('/deposits', 'DepositsController@index');
 
+    Route::get('/withdrawals/to_bank', 'WithdrawalsController@toBank');
+
     Route::get('/pay/{username}', 'UsersController@pay');
 
     // API routes
@@ -38,5 +40,7 @@ Route::group(['before' => 'auth'], function () {
 
         Route::get('/users/find/{username}', 'Api\v1\UsersController@find');
         Route::post('/users/pay', 'Api\v1\UsersController@pay');
+
+        Route::post('/withdrawals/to_bank', ['before' => ['bankOwner'], 'uses' => 'Api\v1\WithdrawalsController@toBank']);
     });
 });

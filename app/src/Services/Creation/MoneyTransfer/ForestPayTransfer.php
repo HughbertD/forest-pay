@@ -40,7 +40,7 @@ class ForestPayTransfer
 
     public function __construct($payingUserId, $receivingUserName, $amount, $reference = '')
     {
-        if ($amount <= 0) {
+        if ($amount <= 0 || !is_numeric($amount)) {
             throw new TransferValidationException(self::$errorMessages['negative_amount']);
         }
         $this->payingUser = \User::findOrFail($payingUserId)->first();

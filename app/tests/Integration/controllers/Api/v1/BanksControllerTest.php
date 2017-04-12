@@ -17,6 +17,7 @@ class BanksControllerTest extends \IntegrationTestCase
             'profile' => ['first_name' => 'Hugh', 'last_name' => 'Downer']
         ]);
         $this->user = $userBuilder->build();
+        $this->be($this->user);
     }
 
     /**
@@ -24,7 +25,6 @@ class BanksControllerTest extends \IntegrationTestCase
      */
     public function testStoreBank()
     {
-        $this->be($this->user);
         $response = $this->call('POST', 'api/v1/banks', [
             'name' => 'Bank Name',
             'bank_name' => 'Barclays Bank',
@@ -51,7 +51,6 @@ class BanksControllerTest extends \IntegrationTestCase
      */
     public function testStoreBankGivesValidationError()
     {
-        $this->be($this->user);
         $response = $this->call('POST', 'api/v1/banks', [
             'bank_name' => 'Barclays Bank',
             'beneficiary_name' => 'Karl Francis'
