@@ -43,7 +43,7 @@ class ForestPayTransfer
         if ($amount <= 0 || !is_numeric($amount)) {
             throw new TransferValidationException(self::$errorMessages['negative_amount']);
         }
-        $this->payingUser = \User::findOrFail($payingUserId)->first();
+        $this->payingUser = \User::findOrFail($payingUserId);
         $this->payingUser->balance = \Transaction::where('user_id', $payingUserId)->get()->balance();
         if ($this->payingUser->balance < $amount) {
             throw new InsufficientFundException(self::$errorMessages['too_low']);
