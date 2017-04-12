@@ -4,8 +4,6 @@ class Transaction extends Eloquent
 {
     public static $event = 'Transaction';
 
-    public $data = [];
-
     protected $fillable = ['user_id', 'bank_account_id', 'wallet_id', 'amount', 'event', 'data'];
 
     protected $dataArray;

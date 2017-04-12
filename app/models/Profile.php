@@ -8,4 +8,9 @@ class Profile extends Eloquent
     {
         return $this->belongsTo('User');
     }
+
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . " " . $this->last_name;
+    }
 }

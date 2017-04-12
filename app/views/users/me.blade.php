@@ -1,6 +1,6 @@
 @extends('layouts.base')
 @section('content')
-    <div class="row">
+    <div class="row" style="margin-bottom: 20px;">
         <div class="col col-lg-12">
             <div class="card">
                 <div class="card-block">
@@ -11,11 +11,16 @@
         </div>
     </div>
 
-
-    <div class="row">
+    <div class="row" style="margin-bottom: 20px;">
         <div class="col col-lg-6">
             <div id="bankPod">
                 @include('banks.index', ['banks' => $banks])
+            </div>
+        </div>
+
+        <div class="col col-lg-6">
+            <div id="userPod">
+                @include('users.find')
             </div>
         </div>
     </div>

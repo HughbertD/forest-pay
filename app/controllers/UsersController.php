@@ -11,9 +11,18 @@ class UsersController extends BaseController
      * @var User
      */
     protected $user;
+
+    protected $allowedTemplates = ['users.pay'];
+
     public function __construct(User $user)
     {
         $this->user = $user;
+    }
+
+    public function pay($username)
+    {
+        $user = \User::where('username', $username)->with('profile')->first();
+        return View::make('users.pay', compact('user'));
     }
 
     /**

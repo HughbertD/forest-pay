@@ -40,6 +40,8 @@ class DepositsControllerTest extends \IntegrationTestCase
         $this->assertInternalType('array', $jsonResponse);
         $this->assertInstanceOf(\Transaction::class, $deposit);
         $this->assertEquals(\Deposit::$event, $deposit->event);
+        $this->assertInternalType('array', $deposit->data);
+        $this->assertFalse(empty($deposit->data));
     }
 
     /**
