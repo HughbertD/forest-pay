@@ -12,9 +12,9 @@
 <body>
 <div class="container">
 
-    <div class="row" style="margin-bottom: 20px;">
+    <div class="row" style="margin: 20px 0;">
         <div class="col col-lg-12">
-            <h1>Forest Pay</h1>
+            <h1 class="text-center">Forest Pay</h1>
         </div>
     </div>
 

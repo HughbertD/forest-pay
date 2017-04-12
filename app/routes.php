@@ -1,6 +1,8 @@
 <?php
 
+
 // Render login
+Route::get('/', 'SessionsController@create');
 Route::get('login', 'SessionsController@create');
 
 // Route for logout
