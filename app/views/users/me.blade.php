@@ -19,24 +19,29 @@
         </div>
 
         <div class="col col-lg-6">
-            <div id="userPod">
-                @include('users.find')
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col col-lg-12">
+                    <div id="userPod">
+                        @include('users.find')
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+            <div class="row">
+                <div class="col col-lg-12">
+                    <div id="withdrawPod">
+                        @include('withdrawals.pod', ['banks' => $banks])
+                    </div>
+                </div>
 
-    <div class="row" style="margin-bottom: 20px;">
-        <div class="col col-lg-6">
-            <div id="withdrawPod">
-                @include('withdrawals.pod', ['banks' => $banks])
             </div>
+
         </div>
     </div>
 
     <div class="row">
         <div class="col col-lg-12">
             <div id="depositPod">
-                @include('deposits.index', ['deposits' => $deposits])
+                @include('transactions.index', ['transactions' => $transactions])
             </div>
         </div>
     </div>

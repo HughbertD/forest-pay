@@ -32,7 +32,7 @@ class UsersController extends BaseController
     {
         $user = User::find(Auth::user()->id);
         $deposits = $user->deposits()->orderBy('created_at', 'desc')->limit(10)->get();
-        $transactions = \Transaction::where('user_id', $user->id)->get();
+        $transactions = \Transaction::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
 
         return View::make('users.me', ['user' => $user, 'wallet' => $user->wallet()->first(), 'banks' => $user->bankAccounts()->get(), 'deposits' => $deposits, 'transactions' => $transactions]);
     }
