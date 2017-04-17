@@ -6,6 +6,11 @@
                 <div class="card-block">
                     <h4 class="card-title">Hello {{ $user->profile->first_name }}</h4>
                     <h6 class="card-subtitle mb-2 text-muted">Current balance {{ $transactions->balance() }}</h6>
+                    <h6>
+                        <a href="/deposits/template/deposits.add" data-modal-get="/me" data-modal-get-container="document" data-modal="true" data-modal-title="Deposit money">
+                            Deposit money
+                        </a>
+                    </h6>
                 </div>
             </div>
         </div>
